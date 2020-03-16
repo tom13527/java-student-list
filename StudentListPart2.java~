@@ -1,0 +1,88 @@
+import java.util.*;
+/**
+    This class will prompt the user for information on a
+    student they wish to enter. It will be held within and ArrayList.
+
+    @author Tom Good
+*/
+public class StudentListPart2 {
+
+    // create instance variables
+    private ArrayList<StudentListPart2> students;
+    private InputHelper input;
+
+    /**
+        This ArrayList will add students based on the user's
+        input.
+    */
+    public void createStudents() {
+
+        // instantiate variables
+        input = new InputHelper();
+        students = new ArrayList<StudentListPart2>();
+
+
+        // create variables to hold input
+        int studentId = 0;
+        String studentName = "";
+        String studentSchool = "";
+        String homeroomTeacher = "";
+        String studentGradeLevel = "";
+        String extracurricularActivities = "";
+        String showTellItem = "";
+        int studentIdNum = 0;
+        String more = "";
+        StudentListPart2 newHighSchoolStudent = null;
+        StudentListPart2 newMiddleSchoolStudent = null;
+        StudentListPart2 newElementaryStudent = null;
+
+        // use loop for input
+        while (true) {
+            studentId = input.getStudentId(
+                "Please enter student ID number.");
+            studentName = input.getStudentName(
+                "Enter the student's name.");
+            studentSchool = input.getStudentSchool(
+                "Enter the student's school.");
+            studentGradeLevel = input.getUserInupt(
+                "Enter whether the student is in Highschool, Middleschool, "
+                + "or Elementary");
+            studentIdNum = Integer.parseInt(studentId);
+            if (studentGradeLevel.equals("Highschool")) {
+                homeroomTeacher = input.getHomeroomTeacher(
+                    "Enter the student's homeroom teacher.");
+                newHighSchoolStudent = new MiddleSchoolStudent();
+                newHighSchoolStudent.setStudentId(studentIdNum);
+                newHighSchoolStudent.setStudentName(studentName);
+                newHighSchoolStudent.setStudentSchool(studentSchool);
+                newHighSchoolStudent.setHomeroomTeacher(homeroomTeacher);
+                students.add(newHighSchoolStudent);
+            }
+             if (studentGradeLevel.equals("Middleschool")) {
+                extracurricularActivities = input.getExtracurricularActivites(
+                    "Enter the student's extracurricular activities.");
+                newMiddleSchoolStudent = new ElementaryStudent();
+                newMiddleSchoolStudent.setStudentId(studentIdNum);
+                newMiddleSchoolStudent.setStudentName(studentName);
+                newMiddleSchoolStudent.setStudentSchool(studentSchool);
+                newMiddleSchoolStudent.setHomeroomTeacher(homeroomTeacher);
+                students.add(newMiddleSchoolStudent);
+            }
+            if (studentGradeLevel.equals("Elementary")) {
+                showTellItem = input.showTellItem(
+                    "Enter the student's show and tell item.");
+                newElementaryStudent = new HighSchoolStudent();
+                newElementaryStudent.setStudentId(studentIdNum);
+                newElementaryStudent.setStudentName(studentName);
+                newElementaryStudent.setStudentSchool(studentSchool);
+                newElementaryStudent.setHomeroomTeacher(homeroomTeacher);
+                students.add(newElementaryStudent);
+            }
+            more = input.getUserInput(
+                    "Would you like to enter another student?");
+            if (!more.equals("y")) {
+                    break;
+            }
+        }
+    }
+}
